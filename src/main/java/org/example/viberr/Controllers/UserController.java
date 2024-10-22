@@ -14,11 +14,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User savedUser = userService.save(user);
-        return ResponseEntity.ok(savedUser);
-    }
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.findAll();
@@ -31,10 +26,22 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        User savedUser = userService.save(user);
+        return ResponseEntity.ok(savedUser);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
         User updatedUser = userService.update(id, userDetails);
         return ResponseEntity.ok(updatedUser);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> patchUser(@PathVariable Long id, @RequestBody User userDetails) {
+        User patchedUser = userService.patch(id, userDetails);
+        return ResponseEntity.ok(patchedUser);
     }
 
     @DeleteMapping("/{id}")
