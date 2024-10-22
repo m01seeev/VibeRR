@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: VibeRR
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/VibeRR_DB
+    username: postgres
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: VibeRR_DB
+      uri: mongodb://localhost:27017/VibeRR_DB
