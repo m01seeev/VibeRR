@@ -1,2 +1,4 @@
-package org.example.viberr.Models;public class Subscription {
+package org.example.viberr.Models;
+
+public class Subscription {
 }
