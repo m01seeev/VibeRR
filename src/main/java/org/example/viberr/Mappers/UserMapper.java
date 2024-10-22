@@ -12,11 +12,11 @@ public interface UserMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateUserFromDto(User userDetails, @MappingTarget User user);
 
-    default Role stringToRole(String role) {
-        return Role.valueOf(role);
+    default String roleToString(Role role) {
+        return role != null ? role.name() : null;
     }
 
-    default String roleToString(Role role) {
-        return role.name();
+    default Role stringToRole(String role) {
+        return role != null ? Role.valueOf(role) : null;
     }
 }

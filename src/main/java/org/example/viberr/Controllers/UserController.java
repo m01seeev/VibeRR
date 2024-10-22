@@ -1,8 +1,8 @@
 package org.example.viberr.Controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.example.viberr.Models.User;
 import org.example.viberr.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable long id) {
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.findById(id);
         return ResponseEntity.ok(user);
     }

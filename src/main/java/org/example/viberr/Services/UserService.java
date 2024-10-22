@@ -1,23 +1,20 @@
 package org.example.viberr.Services;
 
+import lombok.RequiredArgsConstructor;
 import org.example.viberr.Mappers.UserMapper;
 import org.example.viberr.Models.User;
 import org.example.viberr.Repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserMapper userMapper;
-
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -36,6 +33,7 @@ public class UserService {
         User user = findById(id);
         user.setUsername(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());
+        user.setPhone(userDetails.getPhone());
         user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
         user.setRole(userDetails.getRole());
         return userRepository.save(user);
@@ -48,7 +46,6 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        User user = findById(id);
-        userRepository.delete(user);
+        userRepository.deleteById(id);
     }
 }

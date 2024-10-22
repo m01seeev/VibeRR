@@ -19,7 +19,10 @@ public class User {
     private String phone;
     @Column(nullable = false, name = "password")
     private String password;
-//    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "role")
-    private String role;
+    private Role role;
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    private Profile profile_id;
 }
