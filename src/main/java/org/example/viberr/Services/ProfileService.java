@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.viberr.Mappers.ProfileMapper;
 import org.example.viberr.Models.Profile;
 import org.example.viberr.Repositories.ProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class ProfileService {
         profile.setSurname(profileDetails.getSurname());
         profile.setPatronymic(profileDetails.getPatronymic());
         profile.setBirthDate(profileDetails.getBirthDate());
-        profile.setPic_ref(profileDetails.getPic_ref());
+        profile.setPicRef(profileDetails.getPicRef());
         profile.setLocation(profileDetails.getLocation());
         profile.setStatus(profileDetails.getStatus());
         return profileRepository.save(profile);
