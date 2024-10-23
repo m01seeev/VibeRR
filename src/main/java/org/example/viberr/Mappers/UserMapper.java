@@ -17,6 +17,6 @@ public interface UserMapper {
     }
 
     default Role stringToRole(String role) {
-        return role != null ? Role.valueOf(role) : null;
+        return role != null ? Role.valueOf(role.toUpperCase()) : null;
     }
 }

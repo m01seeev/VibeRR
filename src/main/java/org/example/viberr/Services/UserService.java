@@ -39,6 +39,7 @@ public class UserService {
         user.setPhone(userDetails.getPhone());
         user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
         user.setRole(userDetails.getRole());
+        user.setProfile(userDetails.getProfile());
         return userRepository.save(user);
     }
 

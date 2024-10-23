@@ -24,5 +24,5 @@ public class User {
     private Role role;
     @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
-    private Profile profile_id;
+    private Profile profile;
 }
