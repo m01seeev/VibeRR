@@ -19,10 +19,10 @@ public class Profile {
     private String surname;
     @Column(name = "patronimyc")
     private String patronymic;
-    @Column(name = "birthDate")
+    @Column(name = "birth_date")
     private LocalDate birthDate;
     @Column(name = "pic_ref")
-    private String pic_ref;
+    private String picRef;
     @Column(name = "location")
     private String location;
     @Enumerated(EnumType.STRING)
