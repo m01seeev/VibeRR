@@ -17,6 +17,6 @@ public interface ProfileMapper {
     }
 
     default ProfileStatus stringToProfileStatus(String profileStatus) {
-        return profileStatus != null ? ProfileStatus.valueOf(profileStatus) : null;
+        return profileStatus != null ? ProfileStatus.valueOf(profileStatus.toUpperCase()) : null;
     }
 }

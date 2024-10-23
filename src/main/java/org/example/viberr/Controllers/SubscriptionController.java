@@ -43,7 +43,7 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Subscription> deleteSubscription(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSubscription(@PathVariable Long id) {
         subscriptionService.delete(id);
         return ResponseEntity.noContent().build();
     }
