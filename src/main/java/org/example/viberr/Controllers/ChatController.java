@@ -43,4 +43,10 @@ public class ChatController {
         Chat patchedChat = chatService.patch(id, chatDetails);
         return ResponseEntity.ok(patchedChat);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteChat(@PathVariable String id) {
+        chatService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

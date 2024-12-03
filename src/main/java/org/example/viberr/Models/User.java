@@ -22,7 +22,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "role")
     private UserRole role;
-    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "profileId", referencedColumnName = "id")
-    private Profile profileId;
+    @Column(name = "profile_id")
+    private Long profileId;
 }

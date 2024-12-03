@@ -12,10 +12,10 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "subscribedFromId", nullable = false)
+    @Column(name = "subscribed_from_id", nullable = false)
     private Long subscribedFromId;
-    @Column(name = "subscribedToId", nullable = false)
+    @Column(name = "subscribed_to_id", nullable = false)
     private Long subscribedToId;
-    @Column(name = "subscribedAt")
+    @Column(name = "subscribed_at")
     private LocalDateTime subscribedAt;
 }
