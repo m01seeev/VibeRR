@@ -34,18 +34,16 @@ public class UserService {
 
     public User update(Long id, User userDetails) {
         User user = findById(id);
-        user.setUsername(userDetails.getUsername());
-        user.setEmail(userDetails.getEmail());
-        user.setPhone(userDetails.getPhone());
-        user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
-        user.setRole(userDetails.getRole());
-        user.setProfile(userDetails.getProfile());
+        userMapper.updateUserFromDto(userDetails, user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setId(id);
         return userRepository.save(user);
     }
 
     public User patch(Long id, User userDetails) {
         User user = findById(id);
-        userMapper.updateUserFromDto(userDetails, user);
+        userMapper.patchUserFromDto(userDetails, user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

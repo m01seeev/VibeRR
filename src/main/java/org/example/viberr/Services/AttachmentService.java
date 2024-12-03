@@ -28,15 +28,14 @@ public class AttachmentService {
 
     public Attachment update(String id, Attachment attachmentDetails) {
         Attachment attachment = findById(id);
-        attachment.setFileType(attachmentDetails.getFileType());
-        attachment.setFileUrl(attachmentDetails.getFileUrl());
-        attachment.setMessageId(attachmentDetails.getMessageId());
+        attachmentMapper.updateAttachmentFromDto(attachmentDetails, attachment);
+        attachment.setId(id);
         return attachmentRepository.save(attachment);
     }
 
     public Attachment patch(String id, Attachment attachmentDetails) {
         Attachment attachment = findById(id);
-        attachmentMapper.updateAttachmentFromDto(attachmentDetails, attachment);
+        attachmentMapper.patchAttachmentFromDto(attachmentDetails, attachment);
         return attachmentRepository.save(attachment);
     }
 

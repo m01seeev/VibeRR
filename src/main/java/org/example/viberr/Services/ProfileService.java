@@ -28,21 +28,17 @@ public class ProfileService {
 
     public Profile update(Long id, Profile profileDetails) {
         Profile profile = findById(id);
-        profile.setName(profileDetails.getName());
-        profile.setSurname(profileDetails.getSurname());
-        profile.setPatronymic(profileDetails.getPatronymic());
-        profile.setBirthDate(profileDetails.getBirthDate());
-        profile.setPicRef(profileDetails.getPicRef());
-        profile.setLocation(profileDetails.getLocation());
-        profile.setStatus(profileDetails.getStatus());
+        profileMapper.updateProfileFromDto(profileDetails, profile);
+        profile.setId(id);
         return profileRepository.save(profile);
     }
 
     public Profile patch(Long id, Profile profileDetails) {
         Profile profile = findById(id);
-        profileMapper.updateProfileFromDto(profileDetails, profile);
+        profileMapper.patchProfileFromDto(profileDetails, profile);
         return profileRepository.save(profile);
     }
+
     public void delete(Long id) {
         profileRepository.deleteById(id);
     }

@@ -6,10 +6,14 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.context.annotation.Bean;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface AttachmentMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void patchAttachmentFromDto(Attachment attachmentDetails, @MappingTarget Attachment attachment);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     void updateAttachmentFromDto(Attachment attachmentDetails, @MappingTarget Attachment attachment);
 
     default String attachmentTypeToString(AttachmentType attachmentType) {

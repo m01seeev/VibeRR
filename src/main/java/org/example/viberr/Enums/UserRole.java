@@ -1,6 +1,6 @@
 package org.example.viberr.Enums;
 
-public enum Role {
+public enum UserRole {
     USER,
     ADMIN
 }

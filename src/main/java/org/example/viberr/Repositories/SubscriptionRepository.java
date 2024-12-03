@@ -1,6 +1,7 @@
 package org.example.viberr.Repositories;
 
 import org.example.viberr.Models.Subscription;
+import org.example.viberr.Models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

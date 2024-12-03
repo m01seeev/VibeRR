@@ -11,8 +11,10 @@ import java.time.LocalDateTime;
 public class Message {
     @Id
     private String id;
-    private String sender;
-    private String recipient;
+    private Long senderId;
+    private String chatId;
     private String text;
     private LocalDateTime timestamp;
+    private Long forwardedFromId;
+    private String replyToId;
 }

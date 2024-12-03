@@ -1,17 +1,16 @@
 package org.example.viberr.Mappers;
 
-import org.example.viberr.Models.Subscription;
+import org.example.viberr.Models.Message;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 @Mapper(componentModel = "spring")
-public interface SubscriptionMapper {
+public interface MessageMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void patchSubscriptionFromDto(Subscription subscriptionDetails, @MappingTarget Subscription subscription);
-
+    void patchMessageFromDto(Message messageDetails, @MappingTarget Message message);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    void updateSubscriptionFromDto(Subscription subscriptionDetails, @MappingTarget Subscription subscription);
+    void updateMessageFromDto(Message messageDetails, @MappingTarget Message message);
 }

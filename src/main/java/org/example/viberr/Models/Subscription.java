@@ -12,12 +12,10 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subscribed_from_id", nullable = false)
-    private User subscribedFrom;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subscribed_to_id", nullable = false)
-    private User subscribedTo;
-    @Column(name = "subscribed_at", nullable = false)
+    @Column(name = "subscribedFromId", nullable = false)
+    private Long subscribedFromId;
+    @Column(name = "subscribedToId", nullable = false)
+    private Long subscribedToId;
+    @Column(name = "subscribedAt")
     private LocalDateTime subscribedAt;
 }

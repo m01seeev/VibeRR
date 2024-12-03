@@ -30,15 +30,14 @@ public class SubscriptionService {
 
     public Subscription update(Long id, Subscription subscriptionDetails) {
         Subscription subscription = findById(id);
-        subscription.setSubscribedFrom(subscriptionDetails.getSubscribedFrom());
-        subscription.setSubscribedTo(subscriptionDetails.getSubscribedTo());
-        subscription.setSubscribedAt(subscriptionDetails.getSubscribedAt());
+        subscriptionMapper.updateSubscriptionFromDto(subscriptionDetails, subscription);
+        subscription.setId(id);
         return subscriptionRepository.save(subscription);
     }
 
     public Subscription patch(Long id, Subscription subscriptionDetails) {
         Subscription subscription = findById(id);
-        subscriptionMapper.updateSubscriptionFromDto(subscriptionDetails, subscription);
+        subscriptionMapper.patchSubscriptionFromDto(subscriptionDetails, subscription);
         return subscriptionRepository.save(subscription);
     }
 

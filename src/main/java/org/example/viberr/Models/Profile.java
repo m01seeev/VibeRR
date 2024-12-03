@@ -17,7 +17,7 @@ public class Profile {
     private String name;
     @Column(nullable = false, name = "surname")
     private String surname;
-    @Column(name = "patronimyc")
+    @Column(name = "patronymic")
     private String patronymic;
     @Column(name = "birth_date")
     private LocalDate birthDate;
