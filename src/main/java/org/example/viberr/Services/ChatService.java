@@ -16,7 +16,7 @@ public class ChatService {
     private final ChatRepository chatRepository;
     private final ChatMapper chatMapper;
 
-    public List<Chat> finAll() {
+    public List<Chat> findAll() {
         return chatRepository.findAll();
     }
 
@@ -45,7 +45,8 @@ public class ChatService {
             chatMapper.patchGroupChatFromDto((GroupChat) chatDetails, (GroupChat) chat);
         } else if (chat instanceof PrivateChat && chatDetails instanceof PrivateChat) {
             chatMapper.patchPrivateChatFromDto((PrivateChat) chatDetails, (PrivateChat) chat);
-        };
+        }
+        ;
         return chatRepository.save(chat);
     }
 

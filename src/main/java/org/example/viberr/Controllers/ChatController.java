@@ -16,7 +16,7 @@ public class ChatController {
 
     @GetMapping
     public ResponseEntity<List<Chat>> getChats() {
-        List<Chat> chats = chatService.finAll();
+        List<Chat> chats = chatService.findAll();
         return ResponseEntity.ok(chats);
     }
 

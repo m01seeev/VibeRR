@@ -40,8 +40,8 @@ public class AttachmentController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Attachment> patchAttachment(@PathVariable String id, @RequestBody Attachment attachmentDetails) {
-        Attachment updatedAttachment = attachmentService.patch(id, attachmentDetails);
-        return ResponseEntity.ok(updatedAttachment);
+        Attachment patchedAttachment = attachmentService.patch(id, attachmentDetails);
+        return ResponseEntity.ok(patchedAttachment);
     }
 
     @DeleteMapping("/{id}")
