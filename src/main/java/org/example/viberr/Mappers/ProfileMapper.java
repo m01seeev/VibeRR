@@ -1,19 +1,29 @@
 package org.example.viberr.Mappers;
 
+import org.example.viberr.DTO.ProfileDTO;
 import org.example.viberr.Enums.ProfileStatus;
 import org.example.viberr.Models.Profile;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProfileMapper {
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void patchProfileFromDto(Profile profileDetails, @MappingTarget Profile profile);
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    void updateProfileFromDto(Profile profileDetails, @MappingTarget Profile profile);
+    @Mapping(target = "id", ignore = true)
+    void updateProfileFromDto(ProfileDTO profileDto, @MappingTarget Profile profile);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    void patchProfileFromDto(ProfileDTO profileDto, @MappingTarget Profile profile);
+
+    ProfileDTO dtoFromProfile(Profile profile);
+
+    Profile profileFromDto(ProfileDTO profileDto);
+
+    List<ProfileDTO> dtoListFromProfile(List<Profile> profileList);
+
+    List<ProfileDTO> profileListFromDto(List<ProfileDTO> profileDtoList);
 
     default String profileStatusToString(ProfileStatus profileStatus) {
         return profileStatus != null ? profileStatus.toString() : null;

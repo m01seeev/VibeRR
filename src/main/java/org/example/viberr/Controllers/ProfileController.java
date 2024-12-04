@@ -1,7 +1,7 @@
 package org.example.viberr.Controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.viberr.Models.Profile;
+import org.example.viberr.DTO.ProfileDTO;
 import org.example.viberr.Services.ProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +15,32 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @GetMapping
-    public ResponseEntity<List<Profile>> getAllProfiles() {
-        List<Profile> profiles = profileService.findAll();
+    public ResponseEntity<List<ProfileDTO>> getAllProfiles() {
+        List<ProfileDTO> profiles = profileService.findAll();
         return ResponseEntity.ok(profiles);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Profile> getProfileById(@PathVariable Long id) {
-        Profile profile = profileService.findById(id);
+    public ResponseEntity<ProfileDTO> getProfileById(@PathVariable Long id) {
+        ProfileDTO profile = profileService.findById(id);
         return ResponseEntity.ok(profile);
     }
 
     @PostMapping
-    public ResponseEntity<Profile> addProfile(@RequestBody Profile profile) {
-        Profile savedProfile = profileService.save(profile);
+    public ResponseEntity<ProfileDTO> addProfile(@RequestBody ProfileDTO profileDto) {
+        ProfileDTO savedProfile = profileService.save(profileDto);
         return ResponseEntity.ok(savedProfile);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Profile> updateProfile(@PathVariable Long id, @RequestBody Profile profileDetails) {
-        Profile updatedProfile = profileService.update(id, profileDetails);
+    public ResponseEntity<ProfileDTO> updateProfile(@PathVariable Long id, @RequestBody ProfileDTO profileDto) {
+        ProfileDTO updatedProfile = profileService.update(id, profileDto);
         return ResponseEntity.ok(updatedProfile);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Profile> patchProfile(@PathVariable Long id, @RequestBody Profile profileDetails) {
-        Profile patchedProfile = profileService.patch(id, profileDetails);
+    public ResponseEntity<ProfileDTO> patchProfile(@PathVariable Long id, @RequestBody ProfileDTO profileDto) {
+        ProfileDTO patchedProfile = profileService.patch(id, profileDto);
         return ResponseEntity.ok(patchedProfile);
     }
 

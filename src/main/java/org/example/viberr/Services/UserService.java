@@ -1,8 +1,8 @@
 package org.example.viberr.Services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.viberr.DTO.UserDTO;
 import org.example.viberr.Mappers.UserMapper;
-import org.example.viberr.Models.Subscription;
 import org.example.viberr.Models.User;
 import org.example.viberr.Repositories.SubscriptionRepository;
 import org.example.viberr.Repositories.UserRepository;
@@ -15,42 +15,45 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final SubscriptionRepository subscriptionRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userMapper.dtoListFromUser(userRepository.findAll());
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDTO findById(Long id) {
+        return userMapper.dtoFromUser(userRepository.findById(id).orElse(null));
     }
 
-    public User save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public UserDTO save(UserDTO userDto) {
+        User user = userMapper.userFromDto(userDto);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+        return userMapper.dtoFromUser(user);
     }
 
-    public User update(Long id, User userDetails) {
-        User user = findById(id);
-        userMapper.updateUserFromDto(userDetails, user);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setId(id);
-        return userRepository.save(user);
+    public UserDTO update(Long id, UserDTO userDto) {
+        User user = userRepository.findById(id).orElse(null);
+        userMapper.updateUserFromDto(userDto, user);
+        assert user != null;
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+        return userMapper.dtoFromUser(user);
     }
 
-    public User patch(Long id, User userDetails) {
-        User user = findById(id);
-        userMapper.patchUserFromDto(userDetails, user);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public UserDTO patch(Long id, UserDTO userDto) {
+        User user = userRepository.findById(id).orElse(null);
+        userMapper.patchUserFromDto(userDto, user);
+        assert user != null;
+        if (userDto.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
+        userRepository.save(user);
+        return userMapper.dtoFromUser(user);
     }
 
     public void delete(Long id) {
-        List<Subscription> subscriptions = subscriptionRepository.findBySubscribedFromId(id);
-        subscriptions.addAll(subscriptionRepository.findBySubscribedToId(id));
-        subscriptionRepository.deleteAll(subscriptions);
         userRepository.deleteById(id);
     }
 }

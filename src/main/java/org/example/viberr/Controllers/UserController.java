@@ -1,7 +1,7 @@
 package org.example.viberr.Controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.viberr.Models.User;
+import org.example.viberr.DTO.UserDTO;
 import org.example.viberr.Services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,32 +15,32 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.findAll();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.findAll();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        User user = userService.findById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.findById(id);
         return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-        User savedUser = userService.save(user);
+    public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDto) {
+        UserDTO savedUser = userService.save(userDto);
         return ResponseEntity.ok(savedUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        User updatedUser = userService.update(id, userDetails);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDto) {
+        UserDTO updatedUser = userService.update(id, userDto);
         return ResponseEntity.ok(updatedUser);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> patchUser(@PathVariable Long id, @RequestBody User userDetails) {
-        User patchedUser = userService.patch(id, userDetails);
+    public ResponseEntity<UserDTO> patchUser(@PathVariable Long id, @RequestBody UserDTO userDto) {
+        UserDTO patchedUser = userService.patch(id, userDto);
         return ResponseEntity.ok(patchedUser);
     }
 

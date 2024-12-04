@@ -1,19 +1,29 @@
 package org.example.viberr.Mappers;
 
+import org.example.viberr.DTO.UserDTO;
 import org.example.viberr.Enums.UserRole;
 import org.example.viberr.Models.User;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void patchUserFromDto(User userDetails, @MappingTarget User user);
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    void updateUserFromDto(User userDetails, @MappingTarget User user);
+    @Mapping(target = "id", ignore = true)
+    void updateUserFromDto(UserDTO userDto, @MappingTarget User user);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    void patchUserFromDto(UserDTO userDto, @MappingTarget User user);
+
+    UserDTO dtoFromUser(User user);
+
+    User userFromDto(UserDTO userDto);
+
+    List<UserDTO> dtoListFromUser(List<User> userList);
+
+    List<User> userListFromDto(List<UserDTO> userDtoList);
 
     default String userRoleToString(UserRole role) {
         return role != null ? role.name() : null;

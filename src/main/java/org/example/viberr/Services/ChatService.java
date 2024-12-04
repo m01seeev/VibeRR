@@ -35,7 +35,6 @@ public class ChatService {
         } else if (chat instanceof PrivateChat && chatDetails instanceof PrivateChat) {
             chatMapper.updatePrivateChatFromDto((PrivateChat) chatDetails, (PrivateChat) chat);
         }
-        chat.setId(id);
         return chatRepository.save(chat);
     }
 
@@ -46,7 +45,6 @@ public class ChatService {
         } else if (chat instanceof PrivateChat && chatDetails instanceof PrivateChat) {
             chatMapper.patchPrivateChatFromDto((PrivateChat) chatDetails, (PrivateChat) chat);
         }
-        ;
         return chatRepository.save(chat);
     }
 

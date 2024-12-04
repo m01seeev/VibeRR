@@ -1,6 +1,7 @@
 package org.example.viberr.Services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.viberr.DTO.MessageDTO;
 import org.example.viberr.Mappers.MessageMapper;
 import org.example.viberr.Models.Message;
 import org.example.viberr.Repositories.MessageRepository;
@@ -15,30 +16,35 @@ public class MessageService {
     private final MessageRepository messageRepository;
     private final MessageMapper messageMapper;
 
-    public List<Message> findAll() {
-        return messageRepository.findAll();
+    public List<MessageDTO> findAll() {
+        return messageMapper.dtoListFromMessage(messageRepository.findAll());
     }
 
-    public Message findById(String id) {
-        return messageRepository.findById(id).orElse(null);
+    public MessageDTO findById(String id) {
+        return messageMapper.dtoFromMessage(messageRepository.findById(id).orElse(null));
     }
 
-    public Message save(Message message) {
+    public MessageDTO save(MessageDTO messageDto) {
+        Message message = messageMapper.messageFromDto(messageDto);
         message.setTimestamp(LocalDateTime.now());
-        return messageRepository.save(message);
+        messageRepository.save(message);
+        return messageMapper.dtoFromMessage(message);
     }
 
-    public Message update(String id, Message messageDetails) {
-        Message message = findById(id);
-        messageMapper.updateMessageFromDto(messageDetails, message);
-        message.setId(id);
-        return messageRepository.save(message);
+    public MessageDTO update(String id, MessageDTO messageDto) {
+        Message message = messageRepository.findById(id).orElse(null);
+        messageMapper.updateMessageFromDto(messageDto, message);
+        assert message != null;
+        messageRepository.save(message);
+        return messageMapper.dtoFromMessage(message);
     }
 
-    public Message patch(String id, Message messageDetails) {
-        Message message = findById(id);
-        messageMapper.patchMessageFromDto(messageDetails, message);
-        return messageRepository.save(message);
+    public MessageDTO patch(String id, MessageDTO messageDto) {
+        Message message = messageRepository.findById(id).orElse(null);
+        messageMapper.patchMessageFromDto(messageDto, message);
+        assert message != null;
+        messageRepository.save(message);
+        return messageMapper.dtoFromMessage(message);
     }
 
     public void delete(String id) {

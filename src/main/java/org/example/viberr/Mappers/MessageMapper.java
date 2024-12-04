@@ -1,16 +1,26 @@
 package org.example.viberr.Mappers;
 
+import org.example.viberr.DTO.MessageDTO;
 import org.example.viberr.Models.Message;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MessageMapper {
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void patchMessageFromDto(Message messageDetails, @MappingTarget Message message);
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    void updateMessageFromDto(Message messageDetails, @MappingTarget Message message);
+    @Mapping(target = "id", ignore = true)
+    void updateMessageFromDto(MessageDTO messageDto, @MappingTarget Message message);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    void patchMessageFromDto(MessageDTO messageDto, @MappingTarget Message message);
+
+    MessageDTO dtoFromMessage(Message message);
+
+    Message messageFromDto(MessageDTO messageDto);
+
+    List<MessageDTO> dtoListFromMessage(List<Message> messageList);
+
+    List<Message> messageListFromDto(List<MessageDTO> messageDtoList);
 }

@@ -1,7 +1,7 @@
 package org.example.viberr.Controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.example.viberr.Models.Subscription;
+import org.example.viberr.DTO.SubscriptionDTO;
 import org.example.viberr.Services.SubscriptionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,30 +15,30 @@ public class SubscriptionController {
     private final SubscriptionService subscriptionService;
 
     @GetMapping
-    public ResponseEntity<List<Subscription>> getAllSubscriptions() {
-        List<Subscription> subscriptions = subscriptionService.findAll();
+    public ResponseEntity<List<SubscriptionDTO>> getAllSubscriptions() {
+        List<SubscriptionDTO> subscriptions = subscriptionService.findAll();
         return ResponseEntity.ok(subscriptions);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Subscription> getSubscriptionById(@PathVariable Long id) {
-        Subscription subscription = subscriptionService.findById(id);
+    public ResponseEntity<SubscriptionDTO> getSubscriptionById(@PathVariable Long id) {
+        SubscriptionDTO subscription = subscriptionService.findById(id);
         return ResponseEntity.ok(subscription);
     }
     @PostMapping
-    public ResponseEntity<Subscription> addSubscription(@RequestBody Subscription subscription) {
-        Subscription savedSubscription = subscriptionService.save(subscription);
+    public ResponseEntity<SubscriptionDTO> addSubscription(@RequestBody SubscriptionDTO subscriptionDto) {
+        SubscriptionDTO savedSubscription = subscriptionService.save(subscriptionDto);
         return ResponseEntity.ok(savedSubscription);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Subscription> updateSubscription(@PathVariable Long id, @RequestBody Subscription subscriptionDetails) {
-        Subscription updatedSubscription = subscriptionService.update(id, subscriptionDetails);
+    public ResponseEntity<SubscriptionDTO> updateSubscription(@PathVariable Long id, @RequestBody SubscriptionDTO subscriptionDto) {
+        SubscriptionDTO updatedSubscription = subscriptionService.update(id, subscriptionDto);
         return ResponseEntity.ok(updatedSubscription);
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<Subscription> patchSubscription(@PathVariable Long id, @RequestBody Subscription subscriptionDetails) {
-        Subscription patchedSubscription = subscriptionService.patch(id, subscriptionDetails);
+    public ResponseEntity<SubscriptionDTO> patchSubscription(@PathVariable Long id, @RequestBody SubscriptionDTO subscriptionDto) {
+        SubscriptionDTO patchedSubscription = subscriptionService.patch(id, subscriptionDto);
         return ResponseEntity.ok(patchedSubscription);
     }
 

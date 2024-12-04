@@ -1,6 +1,7 @@
 package org.example.viberr.Services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.viberr.DTO.AttachmentDTO;
 import org.example.viberr.Mappers.AttachmentMapper;
 import org.example.viberr.Models.Attachment;
 import org.example.viberr.Repositories.AttachmentRepository;
@@ -14,29 +15,34 @@ public class AttachmentService {
     private final AttachmentRepository attachmentRepository;
     private final AttachmentMapper attachmentMapper;
 
-    public List<Attachment> findAll() {
-        return attachmentRepository.findAll();
+    public List<AttachmentDTO> findAll() {
+        return attachmentMapper.dtoListFromAttachment(attachmentRepository.findAll());
     }
 
-    public Attachment findById(String id) {
-        return attachmentRepository.findById(id).orElse(null);
+    public AttachmentDTO findById(String id) {
+        return attachmentMapper.dtoFromAttachment(attachmentRepository.findById(id).orElse(null));
     }
 
-    public Attachment save(Attachment attachment) {
-        return attachmentRepository.save(attachment);
+    public AttachmentDTO save(AttachmentDTO attachmentDto) {
+        Attachment attachment = attachmentMapper.attachmentFromDto(attachmentDto);
+        attachmentRepository.save(attachment);
+        return attachmentMapper.dtoFromAttachment(attachment);
     }
 
-    public Attachment update(String id, Attachment attachmentDetails) {
-        Attachment attachment = findById(id);
-        attachmentMapper.updateAttachmentFromDto(attachmentDetails, attachment);
-        attachment.setId(id);
-        return attachmentRepository.save(attachment);
+    public AttachmentDTO update(String id, AttachmentDTO attachmentDto) {
+        Attachment attachment = attachmentRepository.findById(id).orElse(null);
+        attachmentMapper.updateAttachmentFromDto(attachmentDto, attachment);
+        assert attachment != null;
+        attachmentRepository.save(attachment);
+        return attachmentMapper.dtoFromAttachment(attachment);
     }
 
-    public Attachment patch(String id, Attachment attachmentDetails) {
-        Attachment attachment = findById(id);
-        attachmentMapper.patchAttachmentFromDto(attachmentDetails, attachment);
-        return attachmentRepository.save(attachment);
+    public AttachmentDTO patch(String id, AttachmentDTO attachmentDto) {
+        Attachment attachment = attachmentRepository.findById(id).orElse(null);
+        attachmentMapper.patchAttachmentFromDto(attachmentDto, attachment);
+        assert attachment != null;
+        attachmentRepository.save(attachment);
+        return attachmentMapper.dtoFromAttachment(attachment);
     }
 
     public void delete(String id) {

@@ -1,20 +1,29 @@
 package org.example.viberr.Mappers;
 
+import org.example.viberr.DTO.AttachmentDTO;
 import org.example.viberr.Enums.AttachmentType;
 import org.example.viberr.Models.Attachment;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.springframework.context.annotation.Bean;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AttachmentMapper {
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void patchAttachmentFromDto(Attachment attachmentDetails, @MappingTarget Attachment attachment);
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    void updateAttachmentFromDto(Attachment attachmentDetails, @MappingTarget Attachment attachment);
+    @Mapping(target = "id", ignore = true)
+    void updateAttachmentFromDto(AttachmentDTO attachmentDto, @MappingTarget Attachment attachment);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    void patchAttachmentFromDto(AttachmentDTO attachmentDto, @MappingTarget Attachment attachment);
+
+    AttachmentDTO dtoFromAttachment(Attachment attachment);
+
+    Attachment attachmentFromDto(AttachmentDTO attachmentDto);
+
+    List<AttachmentDTO> dtoListFromAttachment(List<Attachment> attachmentList);
+
+    List<Attachment> attachmentListFromDto(List<AttachmentDTO> attachmentDtoList);
 
     default String attachmentTypeToString(AttachmentType attachmentType) {
         return attachmentType != null ? attachmentType.name() : null;

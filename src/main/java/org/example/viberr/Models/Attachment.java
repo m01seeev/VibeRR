@@ -5,7 +5,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.Data;
 import org.example.viberr.Enums.AttachmentType;
-import org.mapstruct.EnumMapping;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data

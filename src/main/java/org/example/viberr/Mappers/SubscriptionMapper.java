@@ -1,17 +1,26 @@
 package org.example.viberr.Mappers;
 
+import org.example.viberr.DTO.SubscriptionDTO;
 import org.example.viberr.Models.Subscription;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SubscriptionMapper {
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void patchSubscriptionFromDto(Subscription subscriptionDetails, @MappingTarget Subscription subscription);
-
-
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
-    void updateSubscriptionFromDto(Subscription subscriptionDetails, @MappingTarget Subscription subscription);
+    @Mapping(target = "id", ignore = true)
+    void updateSubscriptionFromDto(SubscriptionDTO subscriptionDto, @MappingTarget Subscription subscription);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    void patchSubscriptionFromDto(SubscriptionDTO subscriptionDto, @MappingTarget Subscription subscription);
+
+    SubscriptionDTO dtoFromSubscription(Subscription subscription);
+
+    Subscription subscriptionFromDto(SubscriptionDTO subscriptionDto);
+
+    List<SubscriptionDTO> dtoListFromSubscription(List<Subscription> subscriptionList);
+
+    List<Subscription> subscriptionListFromDto(List<SubscriptionDTO> subscriptionDtoList);
 }

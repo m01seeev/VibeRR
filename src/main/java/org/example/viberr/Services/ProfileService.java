@@ -1,6 +1,7 @@
 package org.example.viberr.Services;
 
 import lombok.RequiredArgsConstructor;
+import org.example.viberr.DTO.ProfileDTO;
 import org.example.viberr.Mappers.ProfileMapper;
 import org.example.viberr.Models.Profile;
 import org.example.viberr.Repositories.ProfileRepository;
@@ -14,29 +15,34 @@ public class ProfileService {
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
 
-    public List<Profile> findAll() {
-        return profileRepository.findAll();
+    public List<ProfileDTO> findAll() {
+        return profileMapper.dtoListFromProfile(profileRepository.findAll());
     }
 
-    public Profile findById(Long id) {
-        return profileRepository.findById(id).orElse(null);
+    public ProfileDTO findById(Long id) {
+        return profileMapper.dtoFromProfile(profileRepository.findById(id).orElse(null));
     }
 
-    public Profile save(Profile profile) {
-        return profileRepository.save(profile);
+    public ProfileDTO save(ProfileDTO profileDto) {
+        Profile profile = profileMapper.profileFromDto(profileDto);
+        profileRepository.save(profile);
+        return profileMapper.dtoFromProfile(profile);
     }
 
-    public Profile update(Long id, Profile profileDetails) {
-        Profile profile = findById(id);
-        profileMapper.updateProfileFromDto(profileDetails, profile);
-        profile.setId(id);
-        return profileRepository.save(profile);
+    public ProfileDTO update(Long id, ProfileDTO profileDto) {
+        Profile profile = profileRepository.findById(id).orElse(null);
+        profileMapper.updateProfileFromDto(profileDto, profile);
+        assert profile != null;
+        profileRepository.save(profile);
+        return profileMapper.dtoFromProfile(profile);
     }
 
-    public Profile patch(Long id, Profile profileDetails) {
-        Profile profile = findById(id);
-        profileMapper.patchProfileFromDto(profileDetails, profile);
-        return profileRepository.save(profile);
+    public ProfileDTO patch(Long id, ProfileDTO profileDto) {
+        Profile profile = profileRepository.findById(id).orElse(null);
+        profileMapper.patchProfileFromDto(profileDto, profile);
+        assert profile != null;
+        profileRepository.save(profile);
+        return profileMapper.dtoFromProfile(profile);
     }
 
     public void delete(Long id) {
