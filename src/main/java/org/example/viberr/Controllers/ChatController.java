@@ -1,6 +1,7 @@
 package org.example.viberr.Controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.viberr.DTO.Chat.ChatDTO;
 import org.example.viberr.Models.Chat.Chat;
 import org.example.viberr.Services.ChatService;
 import org.springframework.http.ResponseEntity;
@@ -15,32 +16,32 @@ public class ChatController {
     private final ChatService chatService;
 
     @GetMapping
-    public ResponseEntity<List<Chat>> getChats() {
-        List<Chat> chats = chatService.findAll();
+    public ResponseEntity<List<ChatDTO>> getAllChats() {
+        List<ChatDTO> chats = chatService.findAll();
         return ResponseEntity.ok(chats);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Chat> getChatById(@PathVariable String id) {
-        Chat chat = chatService.findById(id);
+    public ResponseEntity<ChatDTO> getChatById(@PathVariable String id) {
+        ChatDTO chat = chatService.findById(id);
         return ResponseEntity.ok(chat);
     }
 
     @PostMapping
-    public ResponseEntity<Chat> addChat(@RequestBody Chat chat) {
-        Chat savedChat = chatService.save(chat);
+    public ResponseEntity<ChatDTO> addChat(@RequestBody ChatDTO chatDto) {
+        ChatDTO savedChat = chatService.save(chatDto);
         return ResponseEntity.ok(savedChat);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Chat> updateChat(@PathVariable String id, @RequestBody Chat chatDetails) {
-        Chat updatedChat = chatService.update(id, chatDetails);
+    public ResponseEntity<ChatDTO> updateChat(@PathVariable String id, @RequestBody ChatDTO chatDto) {
+        ChatDTO updatedChat = chatService.update(id, chatDto);
         return ResponseEntity.ok(updatedChat);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Chat> patchChat(@PathVariable String id, @RequestBody Chat chatDetails) {
-        Chat patchedChat = chatService.patch(id, chatDetails);
+    public ResponseEntity<ChatDTO> patchChat(@PathVariable String id, @RequestBody ChatDTO chatDto) {
+        ChatDTO patchedChat = chatService.patch(id, chatDto);
         return ResponseEntity.ok(patchedChat);
     }
 

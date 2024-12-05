@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.viberr.DTO.UserDTO;
 import org.example.viberr.Mappers.UserMapper;
 import org.example.viberr.Models.User;
-import org.example.viberr.Repositories.SubscriptionRepository;
 import org.example.viberr.Repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
