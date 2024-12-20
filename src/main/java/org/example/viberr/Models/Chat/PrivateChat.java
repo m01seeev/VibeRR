@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(callSuper = true)
 @Document(collection = "chats")
 public class PrivateChat extends Chat {
-    private Long user1Id;
-    private Long user2Id;
+    private String user1Id;
+    private String user2Id;
 }
 

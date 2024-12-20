@@ -21,7 +21,7 @@ public class ProfileController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProfileDTO> getProfileById(@PathVariable Long id) {
+    public ResponseEntity<ProfileDTO> getProfileById(@PathVariable String id) {
         ProfileDTO profile = profileService.findById(id);
         return ResponseEntity.ok(profile);
     }
@@ -33,19 +33,19 @@ public class ProfileController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfileDTO> updateProfile(@PathVariable Long id, @RequestBody ProfileDTO profileDto) {
+    public ResponseEntity<ProfileDTO> updateProfile(@PathVariable String id, @RequestBody ProfileDTO profileDto) {
         ProfileDTO updatedProfile = profileService.update(id, profileDto);
         return ResponseEntity.ok(updatedProfile);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProfileDTO> patchProfile(@PathVariable Long id, @RequestBody ProfileDTO profileDto) {
+    public ResponseEntity<ProfileDTO> patchProfile(@PathVariable String id, @RequestBody ProfileDTO profileDto) {
         ProfileDTO patchedProfile = profileService.patch(id, profileDto);
         return ResponseEntity.ok(patchedProfile);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProfile(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProfile(@PathVariable String id) {
         profileService.delete(id);
         return ResponseEntity.noContent().build();
     }

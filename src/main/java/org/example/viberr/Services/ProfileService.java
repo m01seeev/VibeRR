@@ -19,7 +19,7 @@ public class ProfileService {
         return profileMapper.dtoListFromProfile(profileRepository.findAll());
     }
 
-    public ProfileDTO findById(Long id) {
+    public ProfileDTO findById(String id) {
         return profileMapper.dtoFromProfile(profileRepository.findById(id).orElse(null));
     }
 
@@ -29,7 +29,7 @@ public class ProfileService {
         return profileMapper.dtoFromProfile(profile);
     }
 
-    public ProfileDTO update(Long id, ProfileDTO profileDto) {
+    public ProfileDTO update(String id, ProfileDTO profileDto) {
         Profile profile = profileRepository.findById(id).orElse(null);
         profileMapper.updateProfileFromDto(profileDto, profile);
         assert profile != null;
@@ -37,7 +37,7 @@ public class ProfileService {
         return profileMapper.dtoFromProfile(profile);
     }
 
-    public ProfileDTO patch(Long id, ProfileDTO profileDto) {
+    public ProfileDTO patch(String id, ProfileDTO profileDto) {
         Profile profile = profileRepository.findById(id).orElse(null);
         profileMapper.patchProfileFromDto(profileDto, profile);
         assert profile != null;
@@ -45,7 +45,7 @@ public class ProfileService {
         return profileMapper.dtoFromProfile(profile);
     }
 
-    public void delete(Long id) {
+    public void delete(String id) {
         profileRepository.deleteById(id);
     }
 }

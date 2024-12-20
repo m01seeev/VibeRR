@@ -3,13 +3,15 @@ package org.example.viberr.DTO;
 import lombok.Data;
 import org.example.viberr.Enums.UserRole;
 
+import java.util.List;
+
 @Data
 public class UserDTO {
-    private Long id;
+    private String id;
     private String username;
     private String email;
-    private String phone;
     private String password;
     private UserRole role;
-    private Long profileId;
+    private String profileId;
+    private List<String> contactsIds;
 }

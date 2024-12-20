@@ -1,10 +1,8 @@
 package org.example.viberr.Models.Chat;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import lombok.Data;
 import org.example.viberr.Enums.ChatType;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +10,6 @@ import java.time.LocalDateTime;
 public abstract class Chat {
     @Id
     private String id;
-    @Enumerated(EnumType.STRING)
     private ChatType type;
     private LocalDateTime lastMessage;
 }

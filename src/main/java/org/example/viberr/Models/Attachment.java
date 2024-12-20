@@ -1,10 +1,8 @@
 package org.example.viberr.Models;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import lombok.Data;
 import org.example.viberr.Enums.AttachmentType;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Attachment {
     @Id
     private String id;
-    @Enumerated(EnumType.STRING)
     private AttachmentType fileType;
     private String fileRef;
     private String messageId;

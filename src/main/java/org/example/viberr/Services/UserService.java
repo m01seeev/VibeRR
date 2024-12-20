@@ -21,7 +21,7 @@ public class UserService {
         return userMapper.dtoListFromUser(userRepository.findAll());
     }
 
-    public UserDTO findById(Long id) {
+    public UserDTO findById(String id) {
         return userMapper.dtoFromUser(userRepository.findById(id).orElse(null));
     }
 
@@ -32,7 +32,7 @@ public class UserService {
         return userMapper.dtoFromUser(user);
     }
 
-    public UserDTO update(Long id, UserDTO userDto) {
+    public UserDTO update(String id, UserDTO userDto) {
         User user = userRepository.findById(id).orElse(null);
         userMapper.updateUserFromDto(userDto, user);
         assert user != null;
@@ -41,7 +41,7 @@ public class UserService {
         return userMapper.dtoFromUser(user);
     }
 
-    public UserDTO patch(Long id, UserDTO userDto) {
+    public UserDTO patch(String id, UserDTO userDto) {
         User user = userRepository.findById(id).orElse(null);
         userMapper.patchUserFromDto(userDto, user);
         assert user != null;
@@ -52,7 +52,7 @@ public class UserService {
         return userMapper.dtoFromUser(user);
     }
 
-    public void delete(Long id) {
+    public void delete(String id) {
         userRepository.deleteById(id);
     }
 }

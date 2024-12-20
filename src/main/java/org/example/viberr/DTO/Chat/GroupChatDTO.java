@@ -10,5 +10,6 @@ import java.util.List;
 public class GroupChatDTO extends ChatDTO {
     private String groupName;
     private String groupPicRef;
-    private List<Long> membersIds;
+    private List<String> membersIds;
+    private String leaderId;
 }

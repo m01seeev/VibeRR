@@ -1,7 +1,7 @@
 package org.example.viberr.Repositories;
 
 import org.example.viberr.Models.Profile;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ProfileRepository extends JpaRepository<Profile, Long> {
+public interface ProfileRepository extends MongoRepository<Profile, String> {
 }

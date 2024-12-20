@@ -1,27 +1,21 @@
 package org.example.viberr.Models;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import org.example.viberr.Enums.UserRole;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "users")
+import java.util.List;
+
+@Document(collection = "users")
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true, nullable = false, name = "username")
+    private String id;
     private String username;
-    @Column(unique = true, name = "email")
     private String email;
-    @Column(unique = true, name = "phone")
-    private String phone;
-    @Column(nullable = false, name = "password")
     private String password;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "role")
     private UserRole role;
-    @Column(name = "profile_id")
-    private Long profileId;
+    private String profileId;
+    private List<String> contactsIds;
 }

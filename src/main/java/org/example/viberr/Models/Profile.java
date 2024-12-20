@@ -1,31 +1,22 @@
 package org.example.viberr.Models;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import org.example.viberr.Enums.ProfileStatus;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "profiles")
+@Document(collection = "profiles")
 @Data
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, name = "name")
+    private String id;
     private String name;
-    @Column(nullable = false, name = "surname")
     private String surname;
-    @Column(name = "patronymic")
     private String patronymic;
-    @Column(name = "birth_date")
     private LocalDate birthDate;
-    @Column(name = "pic_ref")
     private String picRef;
-    @Column(name = "location")
     private String location;
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "status")
     private ProfileStatus status;
 }

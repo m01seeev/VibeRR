@@ -13,6 +13,7 @@ import java.util.List;
 public class GroupChat extends Chat {
     private String groupName;
     private String groupPicRef;
-    private List<Long> membersIds;
+    private List<String> membersIds;
+    public String leaderId;
 }
 

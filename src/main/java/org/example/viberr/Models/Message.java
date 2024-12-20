@@ -1,7 +1,7 @@
 package org.example.viberr.Models;
 
-import jakarta.persistence.Id;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 public class Message {
     @Id
     private String id;
-    private Long senderId;
+    private String senderId;
     private String chatId;
     private String text;
     private LocalDateTime timestamp;
-    private Long forwardedFromId;
+    private String forwardedFromId;
     private String replyToId;
 }

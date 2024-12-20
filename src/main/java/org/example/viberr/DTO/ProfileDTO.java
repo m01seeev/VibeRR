@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class ProfileDTO {
-    private Long id;
+    private String id;
     private String name;
     private String surname;
     private String patronymic;

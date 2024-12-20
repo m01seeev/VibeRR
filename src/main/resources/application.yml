@@ -2,17 +2,6 @@ spring:
   application:
     name: VibeRR
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/PostgreRR
-    username: postgres
-    password: c1o2d3i4n5g
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    open-in-view: false
-
   data:
     mongodb:
       host: localhost

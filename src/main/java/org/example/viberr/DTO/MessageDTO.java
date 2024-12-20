@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 @Data
 public class MessageDTO {
     private String id;
-    private Long senderId;
+    private String senderId;
     private String chatId;
     private String text;
     private LocalDateTime timestamp;
-    private Long forwardedFromId;
+    private String forwardedFromId;
     private String replyToId;
 }
